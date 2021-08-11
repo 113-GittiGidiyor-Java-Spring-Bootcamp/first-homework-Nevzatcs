@@ -2,7 +2,7 @@
 .idea/
 out/
 
-# Libraries
+# Packages
 jars/
 .jar
 
