@@ -1,0 +1,7 @@
+# IntelliJ IDEA
+.idea/
+out/
+
+# Libraries
+jars/
+.jar
