@@ -6,7 +6,7 @@ import dev.patika.utils.EntityManagerUtils;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-
+// controller - service relations
 public class CourseController {
     private CourseService courseService = new CourseService();
     EntityManager em = EntityManagerUtils.getEntityManager("mysqlPU");
@@ -23,5 +23,9 @@ public class CourseController {
     }
     public void deleteCourse(int id){
         courseService.deleteCourseFromDatabase(id);
+    }
+
+    public void updateCourse(Course course, int id){
+        courseService.updateOnDatabase(course, id);
     }
 }

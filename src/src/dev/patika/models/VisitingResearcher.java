@@ -1,7 +1,7 @@
 package dev.patika.models;
 
 import javax.persistence.Entity;
-
+// implemented according to requirements
 @Entity
 public class VisitingResearcher extends Instructor{
 

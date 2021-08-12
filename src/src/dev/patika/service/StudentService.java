@@ -10,7 +10,7 @@ import java.util.List;
 
 public class StudentService implements CrudRepository<Student>, StudentRepository {
     EntityManager em = EntityManagerUtils.getEntityManager("mysqlPU");
-
+    //methods
     @Override
     public List<Student> findAll() {
         return em.createQuery("select s from Student s", Student.class).getResultList();
@@ -44,6 +44,23 @@ public class StudentService implements CrudRepository<Student>, StudentRepositor
 
     }
 
+    @Override
+    public void updateOnDatabase(Student student, int id) {
+        try {
+            em.getTransaction().begin();
+
+            Student foundStudent = em.find(Student.class, id);
+            foundStudent.setS_address(student.getS_address());
+            foundStudent.setS_name(student.getS_name());
+            foundStudent.setS_gender(student.getS_gender());
+            foundStudent.setS_birthDate(student.getS_birthDate());
+            em.merge(foundStudent);
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+    }
 
     @Override
     public void deleteStudentFromDatabase(String name) {

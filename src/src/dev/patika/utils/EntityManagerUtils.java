@@ -3,11 +3,10 @@ package dev.patika.utils;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
+//entity manager config
 public class EntityManagerUtils {
 
     static EntityManagerFactory emf = null;
-
 
     public static EntityManager getEntityManager(String persistenceUnitName){
         emf = Persistence.createEntityManagerFactory(persistenceUnitName);

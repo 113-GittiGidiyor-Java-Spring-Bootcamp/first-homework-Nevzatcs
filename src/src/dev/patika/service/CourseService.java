@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CourseService implements CrudRepository<Course> {
     EntityManager em = EntityManagerUtils.getEntityManager("mysqlPU");
-
+    //methods
     @Override
     public List<Course> findAll() {
         return em.createQuery("select c from Course c", Course.class).getResultList();
@@ -33,13 +33,28 @@ public class CourseService implements CrudRepository<Course> {
     }
 
     @Override
-    public void deleteFromDatabase(Course object) {
-
-    }
+    public void deleteFromDatabase(Course object) {}
+    @Override
+    public void deleteFromDatabase(int id) {}
 
     @Override
-    public void deleteFromDatabase(int id) {
+    public void updateOnDatabase(Course course, int id) {
+        try {
+            em.getTransaction().begin();
 
+            Course foundCourse = em.find(Course.class, id);
+            foundCourse.setCourseCode(course.getCourseCode());
+            foundCourse.setCourseName(course.getCourseName());
+            foundCourse.setCreditScore(course.getCreditScore());
+
+            em.merge(foundCourse);
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }finally {
+            EntityManagerUtils.closeEntityManager(em);
+        }
     }
 
     public void deleteCourseFromDatabase(int id) {
